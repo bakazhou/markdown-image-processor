@@ -1,16 +1,13 @@
 const axios = require('axios');
 const fs = require('fs');
 const FormData = require('form-data');
+const userConfig = require('./config');
 
 const config = {
     smms: {
         tokenUrl: 'https://sm.ms/api/v2/token',
         uploadUrl: 'https://sm.ms/api/v2/upload',
-        credentials: {
-            // Here is your SM.MS account info(username, password)
-            username: '',
-            password: ''
-        }
+        credentials: userConfig.smms.credentials
     }
 };
 

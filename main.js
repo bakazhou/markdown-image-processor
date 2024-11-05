@@ -1,6 +1,7 @@
 const fs = require('fs');
 const markdownProcessor = require('./markdown_processor');
 const smmsClient = require('./smms_client');
+const userConfig = require('./config');
 
 const config = {
     imageHost: {
@@ -12,8 +13,7 @@ const config = {
         }
     },
     local: {
-        // Here is your markdown file path
-        mdFile: '',
+        mdFile: userConfig.markdown.filePath,
         imagePattern: /!\[.*?\]\((.*?)\)/g,
     }
 };
