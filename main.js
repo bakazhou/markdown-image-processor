@@ -1,7 +1,6 @@
 const fs = require('fs');
-const markdownImageProcessor = require('./markdown_image_processor');
 const markdownProcessor = require('./markdown_processor');
-const tokenManager = require('./get_smms_token');
+const smmsClient = require('./smms_client');
 
 const config = {
     imageHost: {
@@ -21,7 +20,7 @@ const config = {
 
 async function initializeConfig() {
     try {
-        config.imageHost.headers.Authorization = await tokenManager.getAPIToken();
+        config.imageHost.headers.Authorization = await smmsClient.getAPIToken();
         return true;
     } catch (error) {
         console.error('Failed to initialize config:', error);
@@ -37,7 +36,7 @@ async function processMarkdownImages() {
             throw new Error('Failed to initialize configuration');
         }
         const mdContent = fs.readFileSync(config.local.mdFile, 'utf8');
-        const imageUrls = await markdownImageProcessor.processImages(mdContent, config);
+        const imageUrls = await markdownProcessor.processImages(mdContent, config);
         console.log(`Processed ${imageUrls.length} images`);
         const newContent = await markdownProcessor.updateMarkdown(mdContent, imageUrls);
         const newFilePath = config.local.mdFile.replace('.md', '_uploaded.md');
