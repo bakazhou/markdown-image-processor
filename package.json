@@ -1,0 +1,8 @@
+{
+  "name": "markdown-image-processor",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "form-data": "^4.0.1"
+  }
+}
